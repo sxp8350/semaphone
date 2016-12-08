@@ -20,12 +20,14 @@ union semun{
 };
 
 int create(){
+  umask(0);
   int sd;
   int semid;
   int key = ftok("makefile" , 22);
   int sc;
   sd = shmget(24601, 5000, IPC_CREAT | 0664);
-  semid = semget(key, 1, IPC_CREAT | IPC_EXCL |0644); 
+  semid = semget(key, 1, IPC_CREAT | IPC_EXCL | 0644);
+  int fd = open( "text", O_CREAT | O_WRONLY, 0644);
   return 0;
   
 }
