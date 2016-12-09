@@ -19,30 +19,31 @@ union semun{
   struct seminfo *_buf;
 };
 
-int create(){
-  umask(0);
+
+/// shared memory for how long file 
+
+int main(int argc, char *argv[]){
   int sd;
   int semid;
   int key = ftok("makefile" , 22);
+  int key2 = ftok("num" , 22);
   int sc;
-  sd = shmget(24601, 5000, IPC_CREAT | 0664);
-  semid = semget(key, 1, IPC_CREAT | IPC_EXCL | 0644);
-  int fd = open( "text", O_CREAT | O_WRONLY, 0644);
-  return 0;
-  
-}
-
-int remov(){
-  return 0;
-}
-
-
-int main(int argc, char *argv[]){
   if (strncmp(argv[1], "-c", strlen(argv[1])) == 0){
-    create();
+    umask(0);;
+    int fd = open( "text.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+    sd = shmget(key2, 5000, IPC_CREAT | 0664);
+    semid = semget(key, 1, IPC_CREAT | IPC_EXCL | 0644);
   }
-  if (strncmp(argv[1], "-r", strlen(argv[1])) == 0){
-    remov();
+  else if (strncmp(argv[1], "-v", strlen(argv[1])) == 0){
+    semid = semget(key, 1, 0);
+    sc = semctl(semid, 0, GETVAL);
+    printf("semaphore value: %d\n",sc);
   }
+  else if(strncmp(argv[1], "-r", strlen(argv[1])) == 0){
+    semid = semget(key, 1, 0);
+    sc = semctl(semid, 0, IPC_RMID);
+    shmctl(shmget(key2,5000), IPC_RMID); //fix
+    printf("semaphore removed: %d\n", sc);
+	}
   return 0;
 }
