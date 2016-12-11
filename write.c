@@ -11,3 +11,8 @@
 #include <unistd.h>
 #include <sys/ipc.h>
 #include <sys/sem.h>
+
+
+int main(){
+  return 0;
+}
