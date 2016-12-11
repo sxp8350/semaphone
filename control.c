@@ -13,12 +13,12 @@
 #include <sys/sem.h>
 #include <sys/shm.h>
 
-union semun{
+/*union semun{
   int val;
   struct semid_ds *buff;
   unsigned long *buffer;
   struct seminfo *_buf;
-  };
+  };*/
 
 
 /// shared memory for how long file 
@@ -39,12 +39,34 @@ int main(int argc, char *argv[]){
     semid = semget(key, 1, 0);
     sc = semctl(semid, 0, GETVAL);
     printf("semaphore value: %d\n",sc);
+    int fd = open( "text.txt", O_CREAT | O_WRONLY, 0644);
+    int k = lseek(fd,0, SEEK_END);
+    lseek(fd,0, SEEK_SET);
+    int arr[k];
+    read( fd, arr, k); //copy contents to new arr buffer
+    close(fd);
+    int i = 0; 
+    while(arr[i]){ // breaks here
+      printf("%s", arr[i]);
+      i ++;
+    }
   }
   else if(strncmp(argv[1], "-r", strlen(argv[1])) == 0){
     semid = semget(key, 1, 0);
     sc = semctl(semid, 0, IPC_RMID);
     shmctl(shmget(key2,5000, 0), IPC_RMID, 0); //fix
     printf("semaphore removed: %d\n", sc);
-	}
+    int fd = open( "text.txt", O_CREAT | O_WRONLY, 0644);
+    int k = lseek(fd,0, SEEK_END);
+    lseek(fd,0, SEEK_SET);
+    int arr[k];
+    read( fd, arr, k); //copy contents to new arr buffer
+    close(fd);
+    int i = 0; 
+    while(arr[i]){ // breaks here
+      printf("%s", arr[i]);
+      i ++;
+    }
+  }
   return 0;
 }
