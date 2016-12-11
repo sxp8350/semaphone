@@ -25,6 +25,9 @@ int main(){
     printf("Enter new line: \n");
     fgets(a,sizeof(a),stdin);
     // write new info
+     if(strstr(a,"\n")){
+       *(strstr(a,"\n")) = 0;
+     }
     int f = strlen(a); //update shared memory with length of new line
     printf("%d \n", f);
     
