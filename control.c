@@ -43,7 +43,7 @@ int main(int argc, char *argv[]){
   else if(strncmp(argv[1], "-r", strlen(argv[1])) == 0){
     semid = semget(key, 1, 0);
     sc = semctl(semid, 0, IPC_RMID);
-    shmctl(shmget(key2,5000), IPC_RMID); //fix
+    shmctl(shmget(key2,5000, 0), IPC_RMID, 0); //fix
     printf("semaphore removed: %d\n", sc);
 	}
   return 0;
