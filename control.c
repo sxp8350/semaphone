@@ -64,7 +64,7 @@ int main(int argc, char *argv[]){
     close(fd);
     int i = 0; 
     while(arr[i]){ // breaks here
-      printf("%s", arr[i]);
+      printf("%p", arr[i]);
       i ++;
     }
   }
