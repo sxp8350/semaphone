@@ -11,14 +11,13 @@
 #include <unistd.h>
 #include <sys/ipc.h>
 #include <sys/sem.h>
-#include <sys/shm.h>
 
 union semun{
   int val;
   struct semid_ds *buff;
   unsigned long *buffer;
   struct seminfo *_buf;
-  };
+};
 
 
 /// shared memory for how long file 
