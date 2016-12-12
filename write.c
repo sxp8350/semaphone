@@ -41,9 +41,10 @@ int main(){
   lseek(fd, (-1 *k), SEEK_END);
   // read using size of last line
   if(k != 0){
-  char prev[k];
-  read(fd, prev, k);
-  printf("previous line is: %s \n", prev);
+    char * buff = (char *)  malloc(sizeof(char *));
+    read(fd, buff, k);
+    printf("previous line is: %s \n", buff);
+    free(buff);
   }
   printf("Enter new line: \n");
   fgets(a,sizeof(a),stdin);
