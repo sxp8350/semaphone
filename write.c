@@ -1,3 +1,6 @@
+////NOTE: IT WAS VERY DIFFICULT FOR US TO TEST OUR WORK ON WINDOWS AND WE KIND OF JUST HAD TO PRAY THAT EVERYTHING WORKED WHICH IS WHY EVERYTHING MIGHT BE BROKEN
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -17,59 +20,59 @@
 int main(){
   int sd;
   int semid;
-  printf("z\n");
+  //printf("z\n");
   int key = ftok("makefile" , 22);
   int key2 = ftok("num" , 22);
 
-  printf("y\n");
+  //printf("y\n");
   
   sd = shmget(key2, 4, 0);
   semid = semget(key, 1,0);
 
-  printf("yy\n");
+  //printf("yy\n");
   //if(1 == semctl(semid, 0, GETVAL)){// insert code to check semaphone    
   struct sembuf sb;
   sb.sem_num = 0;
   sb.sem_flg = SEM_UNDO;
   //downs the semaphore, because its now in use
   sb.sem_op = -1;
-  printf("yyyy\n");
+  //printf("yyyy\n");
   semop(semid, &sb, 1);
-  printf("a\n");
+  //printf("a\n");
  
   char a [256];
   // insert code to read from file
   int fd = open( "text.txt",  O_RDWR, 0644);
-  printf("b\n");
+  //printf("b\n");
   int * k = shmat(sd,0,0);
-  printf("c\n");
+  //printf("c\n");
   printf("shared memory value: %d\n", k);
-  printf("d\n");
+  //printf("d\n");
   lseek(fd, -1 *(*k), SEEK_END);
-  printf("e\n");
+  //printf("e\n");
   // read using size of last line
   char prev[*k];
-  printf("f\n");
+  //printf("f\n");
   read(fd, prev, *k);
   //close(fd);
   //fd = open( "text.txt",  O_APPEND, 0644);
-  printf("g\n");
+  //printf("g\n");
   printf("previous line is: %s \n", prev);
-  printf("h\n");
+  //printf("h\n");
   printf("Enter new line: \n");
   fgets(a,sizeof(a),stdin);
 
 
   lseek(fd, 0, SEEK_END);
   // write new info
-  if(strstr(a,"\n")){
-    *(strstr(a,"\n")) = 0;
-  }
+  //if(strstr(a,"\n")){
+    //*(strstr(a,"\n")) = 0;
+  //}
    
   *k = strlen(a); //update shared memory with length of new line
   write(fd,a,*k );
   shmctl(sd,0,0);
-  printf("%d \n", k);
+  //printf("%d \n", k);
   close(fd);
   sb.sem_op = 1;
   semop(semid, &sb, 1); // restore value
