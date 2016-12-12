@@ -13,12 +13,12 @@
 #include <sys/sem.h>
 #include <sys/shm.h>
 
-/*union semun{
+union semun{
   int val;
   struct semid_ds *buff;
   unsigned long *buffer;
   struct seminfo *_buf;
-  };*/
+  };
 
 
 
@@ -36,7 +36,7 @@ int main(int argc, char *argv[]){
     int fd = open( "text.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
     
     //shared memory
-    sd = shmget(key2, 5000, IPC_CREAT | 0664);
+    sd = shmget(key2, 5000, IPC_CREAT |IPC_EXCL |0664);
     
     //semaphore creation and initalization 
     semid = semget(key, 1, IPC_CREAT | 0644);
