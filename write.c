@@ -14,6 +14,15 @@
 
 
 int main(){
+  int sd;
+  int semid;
+  int key = ftok("makefile" , 22);
+  int key2 = ftok("num" , 22);
+
+  struct sembuf sb;
+  sb.sem_num = 0;
+  sb.sem_flg = SEM_UNDO;
+  
   char a [256];
   if(1){// insert code to check semaphone
     // insert code to read from file
