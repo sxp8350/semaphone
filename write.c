@@ -41,14 +41,14 @@ int main(){
   // insert code to read from file
   int fd = open( "text.txt",  O_RDONLY, 0644);
   printf("b\n");
-  int k = shmat(sd,0,0);
+  int * k = shmat(sd,0,0);
   printf("c\n");
   printf("shared memory value: %d\n", k);
   printf("d\n");
-  lseek(fd, -1 *k, SEEK_END);
+  lseek(fd, -1 *(*k), SEEK_END);
   printf("e\n");
   // read using size of last line
-  char prev[k + 1];
+  char prev[*k];
   printf("f\n");
   read(fd, prev, k);
   close(fd);
