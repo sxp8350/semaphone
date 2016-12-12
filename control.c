@@ -39,7 +39,7 @@ int main(int argc, char *argv[]){
     sd = shmget(key2, 5000, IPC_CREAT | 0664);
     
     //semaphore creation and initalization 
-    semid = semget(key, 1, IPC_CREAT | IPC_EXCL | 0644);
+    semid = semget(key, 1, IPC_CREAT | 0644);
     union semun su;
     su.val = 1;
     semctl(semid, 0, SETVAL, su);
