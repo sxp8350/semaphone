@@ -21,7 +21,7 @@ int main(){
   int key = ftok("makefile" , 22);
   int key2 = ftok("num" , 22);
 
-  sd = shmget(key2, 1, 0);
+  sd = shmget(key2, 4, 0);
   semid = semget(key, 1,0);
 
   //if(1 == semctl(semid, 0, GETVAL)){// insert code to check semaphone    

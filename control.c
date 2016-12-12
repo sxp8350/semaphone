@@ -36,7 +36,7 @@ int main(int argc, char *argv[]){
     int fd = open( "text.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
     
     //shared memory
-    sd = shmget(key2, 1, IPC_CREAT |IPC_EXCL |0664);
+    sd = shmget(key2, 4, IPC_CREAT |IPC_EXCL |0664);
     
     //semaphore creation and initalization 
     semid = semget(key, 1, IPC_CREAT | IPC_EXCL | 0644);
@@ -57,8 +57,8 @@ int main(int argc, char *argv[]){
     sc = semctl(semid, 0, IPC_RMID);
 
     // removes shared memory 
-    struct shmid_ds buf;
-    sd = shmget(key2,5000, 0);
+    //struct shmid_ds buf;
+    sd = shmget(key2,4, 0);
     shmctl(sd, IPC_RMID, &buf);
 
     printf("semaphore and shared memory removed: %s\n", sc);
