@@ -17,19 +17,23 @@
 int main(){
   int sd;
   int semid;
-  
+  printf("z\n");
   int key = ftok("makefile" , 22);
   int key2 = ftok("num" , 22);
 
+  printf("y\n");
+  
   sd = shmget(key2, 4, 0);
   semid = semget(key, 1,0);
 
+  printf("yy\n");
   //if(1 == semctl(semid, 0, GETVAL)){// insert code to check semaphone    
   struct sembuf sb;
   sb.sem_num = 0;
   sb.sem_flg = SEM_UNDO;
   //downs the semaphore, because its now in use
   sb.sem_op = -1;
+  printf("yyyy\n");
   semop(semid, &sb, 1);
   printf("a\n");
  
