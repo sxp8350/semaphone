@@ -32,22 +32,19 @@ int main(){
   sb.sem_op = -1;
   semop(semid, &sb, 1);
 
-
   char a [256];
   // insert code to read from file
   int fd = open( "text.txt",  O_RDWR, 0644);
-  int k = (int) shmat(sd,0,0);
+  int k = shmat(sd,0,0);
   printf("shared memory value: %d\n", k);
-  lseek(fd, (-1 *k), SEEK_END);
+  lseek(fd, -1 *k, SEEK_END);
   // read using size of last line
-  if(k != 0){
-    char * buff = (char *)  malloc(sizeof(char *));
-    read(fd, buff, k);
-    printf("previous line is: %s \n", buff);
-    free(buff);
-  }
+  char prev[k + 1];
+  read(fd, prev, k);
+  printf("previous line is: %s \n", prev);
   printf("Enter new line: \n");
   fgets(a,sizeof(a),stdin);
+
 
   lseek(fd, 0, SEEK_END);
   // write new info
