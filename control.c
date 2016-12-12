@@ -36,7 +36,7 @@ int main(int argc, char *argv[]){
     int fd = open( "text.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
     
     //shared memory
-    sd = shmget(key2, 5000, IPC_CREAT |IPC_EXCL |0664);
+    sd = shmget(key2, 1, IPC_CREAT |IPC_EXCL |0664);
     
     //semaphore creation and initalization 
     semid = semget(key, 1, IPC_CREAT | 0644);
