@@ -32,7 +32,7 @@ int main(){
   sb.sem_op = -1;
   semop(semid, &sb, 1);
   printf("a\n");
-
+ 
   char a [256];
   // insert code to read from file
   int fd = open( "text.txt",  O_RDWR, 0644);

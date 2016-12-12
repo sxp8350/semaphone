@@ -59,7 +59,7 @@ int main(int argc, char *argv[]){
     // removes shared memory 
     //struct shmid_ds buf;
     sd = shmget(key2,4, 0);
-    shmctl(sd, IPC_RMID, &buf);
+    shmctl(sd, IPC_RMID, 0);
 
     printf("semaphore and shared memory removed: %s\n", sc);
 
