@@ -42,7 +42,7 @@ int main(){
     // read using size of last line
     char prev[k];
     read(fd, prev, k);
-    printf("previous line is: %s \n")//, prev);
+    printf("previous line is: %s \n", prev);
     printf("Enter new line: \n");
     fgets(a,sizeof(a),stdin);
 
