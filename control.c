@@ -61,7 +61,7 @@ int main(int argc, char *argv[]){
     sd = shmget(key2,5000, 0);
     shmctl(sd, IPC_RMID, &buf);
 
-    printf("semaphore and shared memory removed: %d\n", sc);
+    printf("semaphore and shared memory removed: %s\n", sc);
 
     //prints story
     int fd = open( "text.txt", O_RDONLY);
