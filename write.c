@@ -37,21 +37,23 @@ int main(){
     // insert code to read from file
     int fd = open( "text.txt",  O_RDWR, 0644);
     int k = shmat(sd,0,0); // placeholder. want k = to negative shared memory
-    lseek(fd,k, SEEK_END);
+    lseek(fd, -k, SEEK_END);
     // read using size of last line
     printf("previous line is: \n");
     printf("Enter new line: \n");
     fgets(a,sizeof(a),stdin);
 
-
+    lseek(fd, 0, SEEK_END);
     // write new info
-     if(strstr(a,"\n")){
-       *(strstr(a,"\n")) = 0;
-     }
+    if(strstr(a,"\n")){
+      *(strstr(a,"\n")) = 0;
+    }
+   
     k = strlen(a); //update shared memory with length of new line
+    write(fd,a,k );
     shmctl(sd,0,0);
     printf("%d \n", k);
-
+    close(fd);
     sb.sem_op = 1;
     semop(semid, &sb, 1); // restore value
   }
