@@ -13,12 +13,12 @@
 #include <sys/sem.h>
 #include <sys/shm.h>
 
-union semun{
+/*union semun{
   int val;
   struct semid_ds *buff;
   unsigned long *buffer;
   struct seminfo *_buf;
-  };
+  };*/
 
 
 
