@@ -52,7 +52,7 @@ int main(){
   printf("f\n");
   read(fd, prev, k);
   close(fd);
-  int fd = open( "text.txt",  O_APPEND, 0644);
+  fd = open( "text.txt",  O_APPEND, 0644);
   printf("g\n");
   printf("previous line is: %s \n", prev);
   printf("h\n");
