@@ -39,7 +39,7 @@ int main(){
  
   char a [256];
   // insert code to read from file
-  int fd = open( "text.txt",  O_RDONLY, 0644);
+  int fd = open( "text.txt",  O_RDWR, 0644);
   printf("b\n");
   int * k = shmat(sd,0,0);
   printf("c\n");
@@ -51,8 +51,8 @@ int main(){
   char prev[*k];
   printf("f\n");
   read(fd, prev, *k);
-  close(fd);
-  fd = open( "text.txt",  O_APPEND, 0644);
+  //close(fd);
+  //fd = open( "text.txt",  O_APPEND, 0644);
   printf("g\n");
   printf("previous line is: %s \n", prev);
   printf("h\n");
@@ -60,7 +60,7 @@ int main(){
   fgets(a,sizeof(a),stdin);
 
 
-  //lseek(fd, 0, SEEK_END);
+  lseek(fd, 0, SEEK_END);
   // write new info
   if(strstr(a,"\n")){
     *(strstr(a,"\n")) = 0;
