@@ -46,18 +46,20 @@ int main(){
   //printf("b\n");
   int * k = shmat(sd,0,0);
   //printf("c\n");
-  printf("shared memory value: %d\n", k);
+  //printf("shared memory value: %d\n", k);
   //printf("d\n");
-  lseek(fd, -1 *(*k), SEEK_END);
-  //printf("e\n");
-  // read using size of last line
-  char prev[*k];
-  //printf("f\n");
-  read(fd, prev, *k);
-  //close(fd);
-  //fd = open( "text.txt",  O_APPEND, 0644);
-  //printf("g\n");
-  printf("previous line is: %s \n", prev);
+  if(*k){
+    lseek(fd, -1 *(*k), SEEK_END);
+    //printf("e\n");
+    // read using size of last line
+    char prev[*k];
+    //printf("f\n");
+    read(fd, prev, *k);
+    //close(fd);
+    //fd = open( "text.txt",  O_APPEND, 0644);
+    //printf("g\n");
+    printf("previous line is: %s \n", prev);
+  }
   //printf("h\n");
   printf("Enter new line: \n");
   fgets(a,sizeof(a),stdin);
