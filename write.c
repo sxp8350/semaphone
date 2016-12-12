@@ -36,9 +36,11 @@ int main(){
     char a [256];
     // insert code to read from file
     int fd = open( "text.txt",  O_RDWR, 0644);
-    int k = shmat(sd,0,0); // placeholder. want k = to negative shared memory
-    lseek(fd, -k, SEEK_END);
+    int k = shmat(sd,0,0); 
+    lseek(fd, -1 *k, SEEK_END);
     // read using size of last line
+    char prev[k];
+    read(fd, prev, k);
     printf("previous line is: \n");
     printf("Enter new line: \n");
     fgets(a,sizeof(a),stdin);
