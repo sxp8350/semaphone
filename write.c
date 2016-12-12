@@ -50,7 +50,7 @@ int main(){
   // read using size of last line
   char prev[*k];
   printf("f\n");
-  read(fd, prev, k);
+  read(fd, prev, *k);
   close(fd);
   fd = open( "text.txt",  O_APPEND, 0644);
   printf("g\n");
@@ -66,8 +66,8 @@ int main(){
     *(strstr(a,"\n")) = 0;
   }
    
-  k = strlen(a); //update shared memory with length of new line
-  write(fd,a,k );
+  *k = strlen(a); //update shared memory with length of new line
+  write(fd,a,*k );
   shmctl(sd,0,0);
   printf("%d \n", k);
   close(fd);
