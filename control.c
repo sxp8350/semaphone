@@ -54,7 +54,7 @@ int main(int argc, char *argv[]){
   else if(strncmp(argv[1], "-r", strlen(argv[1])) == 0){
     //removes semaphore
     semid = semget(key, 1, 0);
-    sc = semctl(semid, 0, IPC_RMID);
+    sc = semctl(semid,IPC_RMID,0);
 
     // removes shared memory 
     //struct shmid_ds buf;
