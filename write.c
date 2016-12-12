@@ -31,17 +31,24 @@ int main(){
   //downs the semaphore, because its now in use
   sb.sem_op = -1;
   semop(semid, &sb, 1);
-
+  printf("a\n");
   char a [256];
   // insert code to read from file
   int fd = open( "text.txt",  O_RDWR, 0644);
+  printf("b\n");
   int k = shmat(sd,0,0);
+  printf("c\n");
   printf("shared memory value: %d\n", k);
+  printf("d\n");
   lseek(fd, -1 *k, SEEK_END);
+  printf("e\n");
   // read using size of last line
   char prev[k + 1];
+  printf("f\n");
   read(fd, prev, k);
+  printf("g\n");
   printf("previous line is: %s \n", prev);
+  printf("h\n");
   printf("Enter new line: \n");
   fgets(a,sizeof(a),stdin);
 
